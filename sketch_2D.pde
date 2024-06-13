@@ -1,5 +1,5 @@
-PShape bokep1;
-PShape bokep2;
+PShape ravi1;
+PShape ravi2;
 float angle = 0;
 float posY = 0;
 float posX = 0;
@@ -11,28 +11,28 @@ void setup() {
   size(1000, 1000);
   
   // Membuat shape pertama
-  bokep1 = createShape();
-  bokep1.beginShape();
-  bokep1.vertex(100, 100);
-  bokep1.vertex(100, 700);
-  bokep1.vertex(200, 700);
-  bokep1.vertex(200, 400);
-  bokep1.vertex(300, 700);
-  bokep1.vertex(500, 700);
-  bokep1.vertex(300, 300);
-  bokep1.vertex(500, 300);
-  bokep1.vertex(500, 100);
-  bokep1.vertex(100, 100);
-  bokep1.endShape(CLOSE);
+  ravi1 = createShape();
+  ravi1.beginShape();
+  ravi1.vertex(100, 100);
+  ravi1.vertex(100, 700);
+  ravi1.vertex(200, 700);
+  ravi1.vertex(200, 400);
+  ravi1.vertex(300, 700);
+  ravi1.vertex(500, 700);
+  ravi1.vertex(300, 300);
+  ravi1.vertex(500, 300);
+  ravi1.vertex(500, 100);
+  ravi1.vertex(100, 100);
+  ravi1.endShape(CLOSE);
 
   // Membuat shape kedua dengan koordinat x dan y ditukar
-  bokep2 = createShape();
-  bokep2.beginShape();
-  bokep2.vertex(300, 150);
-  bokep2.vertex(400, 150);
-  bokep2.vertex(400, 250);
-  bokep2.vertex(250, 250);
-  bokep2.endShape(CLOSE);
+  ravi2 = createShape();
+  ravi2.beginShape();
+  ravi2.vertex(300, 150);
+  ravi2.vertex(400, 150);
+  ravi2.vertex(400, 250);
+  ravi2.vertex(250, 250);
+  ravi2.endShape(CLOSE);
 }
 
 void draw() {
@@ -43,10 +43,10 @@ void draw() {
   scale(mirrorX ? -1 : 1, mirrorY ? -1 : 1);
   
   // Menggambar shape pertama
-  shape(bokep1, -width / 2, -height / 2);
+  shape(ravi1, -width / 2, -height / 2);
 
   // Menggambar shape kedua
-  shape(bokep2, -width / 2, -height / 2);
+  shape(ravi2, -width / 2, -height / 2);
 }
 
 void keyPressed() {
