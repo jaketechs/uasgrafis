@@ -1,45 +1,67 @@
-PFont font;
-float angleX = 0;  
-float angleY = 0;  
-float angleZ = 0;  
-int thickness = 50; 
+PShape ravi1;
+float angle = 0;
+float posY = 0;
+float posX = 0;
+float scaleFactor = 1.0;
+boolean mirrorX = false;
+boolean mirrorY = false;
 
 void setup() {
-  size(800, 600, P3D);
-  font = createFont("Arial-Bold", 200, true);
-  textFont(font);
-  textAlign(CENTER, CENTER);
+  size(1000, 1000);
+  
+  // Membuat shape pertama (R)
+  ravi1 = createShape();
+  ravi1.beginShape();
+  ravi1.vertex(100, 100);
+  ravi1.vertex(100, 700);
+  ravi1.vertex(200, 700);
+  ravi1.vertex(200, 400);
+  ravi1.vertex(300, 700);
+  ravi1.vertex(500, 700);
+  ravi1.vertex(300, 300);
+  ravi1.vertex(500, 300);
+  ravi1.vertex(500, 100);
+  ravi1.vertex(100, 100);
+  ravi1.endShape(CLOSE);
+
+  // Membuat huruf "I" di samping "R"
+  ravi1.beginShape();
+  ravi1.vertex(600, 100); // Atas
+  ravi1.vertex(600, 700); // Bawah
+  ravi1.vertex(700, 700); // Kanan bawah
+  ravi1.vertex(700, 100); // Kanan atas
+  ravi1.vertex(600, 100); // Kembali ke atas
+  ravi1.endShape(CLOSE);
 }
 
 void draw() {
-  background(255);
-  lights();
-  translate(width / 2, height / 2, 0);
-  rotateX(angleX);
-  rotateY(angleY);
-  rotateZ(angleZ);
-  fill(0);
-  for (int i = 0; i < thickness; i++) {
-    pushMatrix();
-    translate(0, 0, -i); 
-    text("R", 0, 0);
-    popMatrix();
-  }
+  background(255); // Membersihkan layar dengan warna putih
+  translate(width / 2 + posX, height / 2 + posY);
+  rotate(radians(angle));
+  scale(mirrorX ? -scaleFactor : scaleFactor, mirrorY ? -scaleFactor : scaleFactor);
+  
+  // Menggambar shape pertama
+  shape(ravi1, -width / 2, -height / 2);
 }
 
 void keyPressed() {
-  float angleStep = 0.1;
-  if (key == 'w') {
-    angleX -= angleStep;  // Pitch atas
-  } else if (key == 's') {
-    angleX += angleStep;  // Pitch bawah
-  } else if (key == 'a') {
-    angleY -= angleStep;  // Yaw kiir
-  } else if (key == 'd') {
-    angleY += angleStep;  // Yaw kanan
-  } else if (key == 'q') {
-    angleZ -= angleStep;  // Roll kiri
-  } else if (key == 'e') {
-    angleZ += angleStep;  // Roll kanan
+  float moveStep = 5;
+  float scaleStep = 0.1;
+  float angleStep = 5;
+
+  switch(key) {
+    case 'W': angle += angleStep; break;
+    case 'C': angle -= angleStep; break;
+    case '<': mirrorX = !mirrorX; break;
+    case '>': mirrorY = !mirrorY; break;
+    case '+': scaleFactor += scaleStep; break;
+    case '-': scaleFactor -= scaleStep; break;
+  }
+
+  switch(keyCode) {
+    case UP: posY -= moveStep; break;
+    case DOWN: posY += moveStep; break;
+    case LEFT: posX -= moveStep; break;
+    case RIGHT: posX += moveStep; break;
   }
 }
